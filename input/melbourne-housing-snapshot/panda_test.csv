@@ -1,0 +1,5 @@
+Suburb,Address,Rooms,Type,Price,Method,Bathroom,Car,Landsize,BuildingArea,YearBuilt
+Abbotsford,85 Turner St,2,h,1480000,S,1,1,202,,
+Abbotsford,25 Bloomburg St,2,h,1035000,S,1,0,156,79,1900
+Abbotsford,5 Charles St,3,h,1465000,SP,2,0,134,150,1900
+Abbotsford,40 Federation La,3,h,850000,PI,2,1,94,,
