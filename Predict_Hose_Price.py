@@ -43,10 +43,23 @@ mean_absolute_error(y, predicted_home_prices)
 #Model Validation using absolute mean error
 from sklearn.model_selection import train_test_split
 
-train_X, val_X, train_y, val_y = train_test_split(X,y,test_size=0.30, random_state=0)
+train_X, val_X, train_y, val_y = train_test_split(X,y, random_state=0)
 melb_model = DecisionTreeRegressor()
 melb_model.fit(train_X, train_y)
 
 val_predictions = melb_model.predict(val_X)
 
 print "Mean Absolute Error = " + str(mean_absolute_error(val_predictions, val_y))
+
+#Comparing the accuracy of models built with different values for max_leaf_nodes.
+def get_mae(max_leafnodes):
+    model = DecisionTreeRegressor(max_leaf_nodes=max_leafnodes, random_state=0)
+    model.fit(train_X, train_y)
+    pred = model.predict(val_X)
+    mae = mean_absolute_error(pred, val_y)
+    return mae
+    
+    
+for max_leafnodes in [5,50,500,5000]:
+    mae = get_mae(max_leafnodes)
+    print("Max leaf nodes: %d \t\t MAE: %d"%(max_leafnodes, mae))
