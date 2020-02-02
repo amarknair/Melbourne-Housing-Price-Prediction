@@ -43,7 +43,7 @@ mean_absolute_error(y, predicted_home_prices)
 #Model Validation using absolute mean error
 from sklearn.model_selection import train_test_split
 
-train_X, val_X, train_y, val_y = train_test_split(X,y, random_state=0)
+train_X, val_X, train_y, val_y = train_test_split(X,y,random_state=0)
 melb_model = DecisionTreeRegressor()
 melb_model.fit(train_X, train_y)
 
@@ -59,7 +59,19 @@ def get_mae(max_leafnodes):
     mae = mean_absolute_error(pred, val_y)
     return mae
     
-    
-for max_leafnodes in [5,50,500,5000]:
+leaf = range(100, 2000, 50)
+min_error = float('inf')
+optimal_leaf = 0
+MAE=[]
+for max_leafnodes in leaf:
     mae = get_mae(max_leafnodes)
+    MAE.append(mae)
     print("Max leaf nodes: %d \t\t MAE: %d"%(max_leafnodes, mae))
+    if min_error>mae:
+        min_error = mae
+        optimal_leaf = max_leafnodes
+print("Optimal leaf = %d forr minimum error = %d"%(optimal_leaf, min_error))
+
+from matplotlib import pyplot
+
+pyplot.plot(leaf,MAE)
