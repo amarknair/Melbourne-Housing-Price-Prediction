@@ -60,18 +60,22 @@ def get_mae(max_leafnodes):
     return mae
     
 leaf = range(100, 2000, 50)
-min_error = float('inf')
-optimal_leaf = 0
-MAE=[]
-for max_leafnodes in leaf:
-    mae = get_mae(max_leafnodes)
-    MAE.append(mae)
-    print("Max leaf nodes: %d \t\t MAE: %d"%(max_leafnodes, mae))
-    if min_error>mae:
-        min_error = mae
-        optimal_leaf = max_leafnodes
-print("Optimal leaf = %d forr minimum error = %d"%(optimal_leaf, min_error))
+#min_error = float('inf')
+#optimal_leaf = 0
+#MAE=[]
 
-from matplotlib import pyplot
-
-pyplot.plot(leaf,MAE)
+scores = {leaf_size: get_mae(leaf_size) for leaf_size in leaf}
+best_tree_size = min(scores, key=scores.get)
+print(best_tree_size)
+#for max_leafnodes in leaf:
+#    mae = get_mae(max_leafnodes)
+#    MAE.append(mae)
+#    print("Max leaf nodes: %d \t\t MAE: %d"%(max_leafnodes, mae))
+#    if min_error>mae:
+#        min_error = mae
+#        optimal_leaf = max_leafnodes
+#print("Optimal leaf = %d forr minimum error = %d"%(optimal_leaf, min_error))
+#
+#from matplotlib import pyplot
+#
+#pyplot.plot(leaf,MAE)
